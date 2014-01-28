@@ -41,7 +41,6 @@ $(document).ready(function(){
 			context.lineTo(x,y);
 			context.stroke(); */
 		}
-
 	});
 
 	$("#myCanvas").mouseup(function(e){
@@ -54,8 +53,5 @@ $(document).ready(function(){
 		context.moveTo(startX,startY);
 		context.lineTo(x,y);
 		context.stroke();*/
-
-
 	});
-
 });
