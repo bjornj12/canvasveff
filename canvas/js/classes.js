@@ -10,15 +10,15 @@ var Whiteboard = {
 	}
 };
 
-var Shape = Base.extend({
+/*var Shape = Base.extend({
 	constructor: function(x,y,color){
 		this.x = x;
 		this.y = y;
-		this.color = color;
+		this.color = color;	
 	}
-});
+});*/
 
-var Rect = Shape.extend({
+/*var Rect = Shape.extend({
 	constructor: function(x,y,color,lineColor){
 		this.base(x,y,color);
 		this.endX = x;
@@ -32,3 +32,4 @@ var Rect = Shape.extend({
 var Circle = Shape.extend({
 
 });
+*/
