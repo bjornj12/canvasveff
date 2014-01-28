@@ -6,6 +6,13 @@ $(document).ready(function(){
 	var startX = 0;
 	var isDrawing = false;
 
+	var nextShape = "Pen";
+
+	$("#Shapegrp").click(function(e){
+		var factory = $(this).attr("data-shape");
+		nextShape = eval(factory);
+	});
+
 	$("#myCanvas").mousedown(function(e){
 		var x = e.pageX - this.offsetLeft;
 		var y = e.pageY - this.offsetTop;
@@ -47,7 +54,7 @@ $(document).ready(function(){
 		/*var x = e.pageX - this.offsetLeft;
 		var y = e.pageY - this.offsetTop;*/
 			
-		isDrawing = false;
+		isDrawing = false
 
 		/*context.beginPath();
 		context.moveTo(startX,startY);

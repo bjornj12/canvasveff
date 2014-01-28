@@ -23,6 +23,7 @@ var Whiteboard = {
 		this.base(x,y,color);
 		this.endX = x;
 	},
+	
 	draw: function(context){
 		context.fillStyle = this.color;
 		context.fillRect(this.x, this.y, this.endX - this.x, this.endY - this.y);
