@@ -13,8 +13,10 @@ $(document).ready(function(){
 		startX = x;
 		startY = y;
 
+		context.beginPath();
+		context.moveTo(startX,startY);
+
 		isDrawing = true;
-		
 
 		//console.log("X: " + x + ", Y: " + y);
 		//context.strokeStyle = "red";
@@ -29,24 +31,29 @@ $(document).ready(function(){
 	$("#myCanvas").mousemove(function(e){
 		if (isDrawing === true)
 		{
-			context.beginPath();
+			var x = e.pageX - this.offsetLeft;
+			var y = e.pageY - this.offsetTop;
+
+			context.lineTo(x,y);
+			context.stroke();
+	/*		context.beginPath();
 			context.moveTo(startX,startY);
 			context.lineTo(x,y);
-			context.stroke(); 
+			context.stroke(); */
 		}
 
 	});
 
 	$("#myCanvas").mouseup(function(e){
-		var x = e.pageX - this.offsetLeft;
-		var y = e.pageY - this.offsetTop;
+		/*var x = e.pageX - this.offsetLeft;
+		var y = e.pageY - this.offsetTop;*/
 			
 		isDrawing = false;
 
-		context.beginPath();
+		/*context.beginPath();
 		context.moveTo(startX,startY);
 		context.lineTo(x,y);
-		context.stroke();
+		context.stroke();*/
 
 
 	});
