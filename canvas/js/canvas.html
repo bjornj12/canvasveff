@@ -1,0 +1,92 @@
+var Whiteboard = {
+	currentColor: "Black",
+	shapes: [],
+
+	redraw: function(context){
+		for (var i = 0; i < this.shapes.length; i++)
+		{
+			this.shapes[i].draw(context);
+		}
+	}
+};
+
+var Shape = Base.extend({
+	constructor: function(x,y,color){
+		this.x = x;
+		this.y = y;
+		this.color = color;
+	}
+});
+
+var Rect = Shape.extend({
+	constructor: function(x,y,color,lineColor){
+		this.base(x,y,color);
+		this.endX = x;
+	},
+	draw: function(context){
+		context.fillStyle = this.color;
+		context.fillRect(this.x, this.y, this.endX - this.x, this.endY - this.y);
+	}
+});
+
+var Circle = Shape.extend({
+
+})
+
+
+
+
+$(document).ready(function(){
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+
+	var startX = 0;
+	var startX = 0;
+	var isDrawing = false;
+
+	$("#myCanvas").mousedown(function(e){
+		var x = e.pageX - this.offsetLeft;
+		var y = e.pageY - this.offsetTop;
+
+		startX = x;
+		startY = y;
+
+		isDrawing = true;
+		
+
+		//console.log("X: " + x + ", Y: " + y);
+		//context.strokeStyle = "red";
+		//context.strokeRect(x-30, y-30, 60,60);
+
+		//context.beginPath();
+		//context.moveTo(0,0);
+		//context.lineTo(x,y);
+		//context.stroke();		
+	});
+
+	$("#myCanvas").mousemove(function(e){
+		if (isDrawing === true)
+		{
+			context.beginPath();
+			context.moveTo(startX,startY);
+			context.lineTo(x,y);
+			context.stroke(); 
+		}
+
+	});
+
+	$("#myCanvas").mouseup(function(e){
+		var x = e.pageX - this.offsetLeft;
+		var y = e.pageY - this.offsetTop;
+			
+		isDrawing = false;
+
+		context.beginPath();
+		context.moveTo(startX,startY);
+		context.lineTo(x,y);
+		context.stroke();
+
+
+	});
+
+});
