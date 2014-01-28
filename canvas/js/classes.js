@@ -32,4 +32,4 @@ var Rect = Shape.extend({
 
 var Circle = Shape.extend({
 
-})
+});
