@@ -3,14 +3,33 @@
     <head>
         <meta charset="utf-8">
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Untitled</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="author" href="humans.txt">
     </head>
     <body>
-        
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script> 
-        <script src="js/main.js"></script>
+        <canvas id="myCanvas" width="800" height="600"
+        style="border:1px solid #000000;"> 
+        </canvas>
+
+        <div "Componentgrp" class="btn-group">
+        <button type="button" class="btn btn-default">Line</button>
+        <button type="button" class="btn btn-default">Rect</button>
+        <button type="button" class="btn btn-default">Pen</button>
+        <button type="button" class="btn btn-default">Circle</button>
+        </div>
+
+        <div id="Colorgrp" class="btn-group">
+        <button type="button" class="btn btn-default">Red</button>
+        <button type="button" class="btn btn-default">Blue</button>
+        <button type="button" class="btn btn-default">Black</button>
+        </div>
+
+
+
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+        <script src="js/smu.js"></script>
     </body>
 </html>
