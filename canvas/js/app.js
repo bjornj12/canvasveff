@@ -1,30 +1,37 @@
 $(document).ready(function(){
 	var canvas = document.getElementById("myCanvas");
 	var context = canvas.getContext("2d");
-
-	var startX = 0;
-	var startX = 0;
+	
 	var isDrawing = false;
+	var nextShape = "createPen";
 
-	var nextShape = "Pen";
-
-	$("#Shapegrp").click(function(e){
+	$(".btnShape").click(function(e){
 		var factory = $(this).attr("data-shape");
 		nextShape = eval(factory);
+		console.log(factory);
+		console.log(nextShape);
 	});
 
 	$("#myCanvas").mousedown(function(e){
 		var x = e.pageX - this.offsetLeft;
 		var y = e.pageY - this.offsetTop;
-
+		//console.log(x,y);
 		startX = x;
 		startY = y;
 
-		context.beginPath();
-		context.moveTo(startX,startY);
+		//context.beginPath();
+		//context.moveTo(startX,startY);
+
+		
+
+		var shape = nextShape();
+
+		context.strokeStyle = shape.color;
+		context.moveTo(startX, startY);
+		//context.lineTo(x,y);
+		//context.stroke();
 
 		isDrawing = true;
-
 		//console.log("X: " + x + ", Y: " + y);
 		//context.strokeStyle = "red";
 		//context.strokeRect(x-30, y-30, 60,60);
@@ -41,8 +48,8 @@ $(document).ready(function(){
 			var x = e.pageX - this.offsetLeft;
 			var y = e.pageY - this.offsetTop;
 
-			context.lineTo(x,y);
-			context.stroke();
+			//context.lineTo(x,y);
+			//context.stroke();
 	/*		context.beginPath();
 			context.moveTo(startX,startY);
 			context.lineTo(x,y);
