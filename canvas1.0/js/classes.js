@@ -2,19 +2,24 @@ var Whiteboard = {
 	currentColor: "Black",
 	shapes: []
 }
-var canvas = document.getElementById("myCanvas");
-var context = canvas.getContext("2d");	
+var canvaso = document.getElementById("myCanvas");
+var contexto = canvaso.getContext("2d");	
 
-/*var container = canvaso.parentNode;
-canvas = document.createElement('canvas');
+var container = canvaso.parentNode;
+var canvas = document.createElement('canvas');
 
 canvas.id = 'imageTemp';
 canvas.width = canvaso.width;
 canvas.height = canvaso.height;
 container.appendChild(canvas);
 
-context = canvas.getContext('2d');
-*/
+var context = canvas.getContext('2d');
+
+function img_update(){
+	contexto.drawImage(canvas,0,0);
+	context.clearRect(0,0,canvas.width,canvas.height);
+}
+
 var isDrawing = false;
 var lastX, lastY;
 var x, y, w, h;
@@ -61,11 +66,9 @@ var Draw = {
 	rectMove: function(x,y){
 		if(isDrawing === true){
 			context.clearRect(0,0,canvas.width,canvas.height);
-			var x = Math.min(x,lastX),
-		    y = Math.min(y,lastY),
-		    w = Math.abs(x - lastX),
-		    h = Math.abs(y - lastY);
-			context.strokeRect(x,y,w,h);
+			var w = x - lastX,
+		        h = y - lastY;
+			context.strokeRect(lastX,lastY,w,h);
 		}
 	},
 	rectStop: function(x,y){
