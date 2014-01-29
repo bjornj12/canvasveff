@@ -11,21 +11,21 @@ $(document).ready(function(){
 		switch (activeTool) {
 			case "pen":
 				console.log("pen");
-				Draw.penStart(x,y);
+				Draw.start(x,y);
 				break;
 			case "line":
-				Draw.penStart(x,y);
+				Draw.start(x,y);
 				console.log("line");
 				break;
 			case "rect":
 				console.log("rect");
-				Draw.rectStart(x,y);
+				Draw.start(x,y);
 				break;
 			case "circle":
 				console.log("circle");
 				break;
 			default:
-				Draw.penStart(x,y);
+				Draw.start(x,y);
 				break;
 		}
 	});
@@ -45,21 +45,26 @@ $(document).ready(function(){
 	});
 
 	$("#myCanvas").mouseup(function(e){
+		Draw.stop();
+/*
 		if (activeTool === "pen"){
-			Draw.penStop();
+			Draw.stop();
 		}
 		else if (activeTool === "line"){
-			Draw.penStop();
+			Draw.stop();
 		}
 		else if (activeTool === "rect"){
-			Draw.rectStop(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-		}
+			Draw.stop(); 
+		}*/
 		img_update();
 	});
 
+
+	//Bjössi: verðum aðeins að skoða þetta þegar músin fer útaf canvasnum.
 	$("#myCanvas").mouseout(function(e){
-		if(activeTool === "pen"){
-			Draw.penStop();
-		}
+		Draw.stop();
+		/*if(activeTool === "pen"){
+			Draw.stop();
+		}*/
 	});
 });
