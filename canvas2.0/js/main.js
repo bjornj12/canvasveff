@@ -19,6 +19,18 @@ $(document).ready(function(){
 		undo();
 	});
 
+	$("#redo").click(function(e){
+		redo();
+	});
+
+	$("#save").click(function(e){
+		save();
+	});
+
+	$("#load").click(function(e){
+		load();
+	});
+
 	var sz = document.forms['pix'].elements['pixels'];
     
 	for (var i=0, len=sz.length; i<len; i++) {

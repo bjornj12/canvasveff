@@ -1,6 +1,8 @@
 var Whiteboard = {
 	currentColor: "Black",
-	shapes: []
+	shapes: [],
+	redoshapes: [],
+	saved: []
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -44,14 +46,16 @@ function clearimage(){
 }
 
 function savecanvas() {
-	var canvasO = document.getElementById("myCanvas");
-	var imgSrc = canvasO.toDataURL("image/png");
+	canvas = document.getElementById("myCanvas");
+	var imgSrc = canvas.toDataURL("image/png");
 	Whiteboard.shapes.push(imgSrc);
 	console.log(Whiteboard.shapes);
 }
-//virkar ekki
+//gerir galdra.
 function undo(){
-	alert(1);
+	var imgSrc = canvas.toDataURL("image/png");
+	Whiteboard.redoshapes.push(imgSrc);
+
 	if(Whiteboard.shapes.length > 0){
 		var imgC = new Image();
 
@@ -59,7 +63,47 @@ function undo(){
 			var canvasbefore = document.getElementById("myCanvas").getContext("2d");
 			canvasbefore.drawImage(imgC, 0, 0);
 		}
+		//Whiteboard.redoshapes.push(Whiteboard.shapes[Whiteboard.shapes.length-1]);
+		console.log(Whiteboard.redoshapes);
 		imgC.src = Whiteboard.shapes.pop();
+	}
+}
+
+function redo(){
+	if (Whiteboard.redoshapes.length > 0){
+		var imgR = new Image();
+
+		imgR.onload = function(){
+			var canvasafter = document.getElementById("myCanvas").getContext("2d");
+			canvasafter.drawImage(imgR, 0, 0);
+		}
+		Whiteboard.shapes.push(Whiteboard.redoshapes[Whiteboard.redoshapes.length-1]);
+		imgR.src = Whiteboard.redoshapes.pop();
+	}
+}
+
+function save(){
+	if (Whiteboard.shapes.length > 0){
+		var imgSrc = canvas.toDataURL("image/png");
+			Whiteboard.saved.push(imgSrc);
+			console.log("lol");
+			console.log(Whiteboard.saved);
+	}
+}
+
+function load(){
+	if (Whiteboard.saved.length > 0)
+	{
+
+		var imgL = new Image();
+
+		imgL.onload = function(){
+			var canvasload = document.getElementById("myCanvas").getContext("2d");
+			canvasload.drawImage(imgL, 0, 0);
+		}
+		imgL.src = Whiteboard.saved.pop();
+		Whiteboard.saved.length = 0;
+		Whiteboard.saved = [];
 	}
 }
 
