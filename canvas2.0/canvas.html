@@ -13,28 +13,32 @@
     <body>
             <canvas id="myCanvas" width="500" height="500"> 
         </canvas>
+
         <div id="Shapegrp" class="btn-group">
-        <input type="button" id="line" class="btnShape btn btn-default" value="Line"></input>
-        <input type="button" id="rect" class="btnShape btn btn-default" value="Rect"></input>
-        <input type="button" id="circle" class="btnShape btn btn-default" value="Circle"></input>
-        <input type="button" id="pen" class="btnShape btn btn-default" value="Pen"></input>
+        <button type="button" id="line" class="btnShape btn btn-default btn-lg btn-block" >Line</button>
+        <button type="button" id="rect" class="btnShape btn btn-default btn-lg btn-block">Rectangle</button>
+        <button type="button" id="circle" class="btnShape btn btn-default btn-lg btn-block">Circle</button>
+        <button type="button" id="pen" class="btnShape btn btn-default btn-lg btn-block">Pen</button>
         </div>
 
-        <div id="Colorgrp" class="btn-group">
-        <button type="button" id="red" class="btnColor btn btn-default">Red</button>
-        <button type="button" id="blue" class="btnColor btn btn-default">Blue</button>
-        <button type="button" id="black" class="btnColor btn btn-default">Black</button>
-        </div>
+           <button type="button" id="black" class="color btnColor btn btn-default">Black</button>
+           <button type="button" id="red" class="color btnColor btn btn-danger">Red</button> 
+           <button type="button" id="blue" class="color btnColor btn btn-primary">Blue</button>
+           <button type="button" id="orange" class="color btnColor btn btn-warning">Orange</button>
+           <button type="button" id="green" class="color btnColor btn btn-success">Green</button>
 
-        <select>
-            <option>1</option>
-            <option>2</option>
-        </select>
-
-        <div id="extraf" class="btn-group">
-        <button type="button" id="clear" class="btn btn-default">Clear</button>
-        <button type="button" id="undo" class="btn btn-default">Undo</button>
-
+        
+        <button type="button" id="clear" class="color btn btn-default">Clear</button>
+        <button type="button" id="undo" class="color btn btn-default">Undo</button>
+            
+        <form action="" id="pix">
+        <input type="radio" name="pixels" value="1" checked="checked">1 pixel(default)<br>
+        <input type="radio" name="pixels" value="2">2 pixels<br>
+        <input type="radio" name="pixels" value="5">5 pixels<br>
+        <input type="radio" name="pixels" value="10">10 pixels<br>
+        </form>
+        
+       
 
 
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>

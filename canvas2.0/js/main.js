@@ -19,6 +19,16 @@ $(document).ready(function(){
 		undo();
 	});
 
+	var sz = document.forms['pix'].elements['pixels'];
+    
+	for (var i=0, len=sz.length; i<len; i++) {
+    sz[i].onclick = function() {
+        changeLinewidth(this.value);
+    };
+	}
+
+
+
 	$("#imageTemp").mousedown(function(e){
 		var x = e.pageX - this.offsetLeft, y = e.pageY - this.offsetTop;
 		switch (activeTool) {
