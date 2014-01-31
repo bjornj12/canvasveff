@@ -35,7 +35,7 @@ $(document).ready(function(){
 				Draw.start(x,y);
 				break;
 			case "circle":
-				Draw.circStart();
+				Draw.circStart(x,y);
 				console.log("circle");
 				break;
 			default:

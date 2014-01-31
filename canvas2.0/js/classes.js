@@ -40,8 +40,7 @@ function undo(){
 }
 
 var isDrawing = false;
-var lastX, lastY;
-var x, y, w, h;
+var x, y, w, h, lastX, lastY;
 
 var Draw = {
 	start: function(x,y){
@@ -63,10 +62,12 @@ var Draw = {
 			context.stroke();*/
 			tempctx.beginPath();
 			tempctx.moveTo(lastX,lastY);
+			console.log("lastX " + lastX + " X " + x);			
 			tempctx.lineTo(x,y);
 			tempctx.stroke();
 			lastX = x, lastY = y;
 			Whiteboard.shapes.push(x,y);
+			
 		}
 	},
 	lineMove: function(x,y){
@@ -99,13 +100,6 @@ var Draw = {
 	circStart: function(x,y){
 		lastX = x, lastY = y;
 		isDrawing = true;
-		var radius = Math.abs(x-lastX);
-		context.beginPath();
-		context.arc(lastX,lastY,radius,0,2*Math.PI);
-		context.fill();
-
-
-		
 		/*tempctx.beginPath();
 		tempctx.arc(lastX,lastY,radius,0,2*Math.PI, false);
 		tempctx.fillStyle = "green";
@@ -116,14 +110,23 @@ var Draw = {
 
 	},
 	circMove: function(x,y){
-		var radius = Math.abs(x-lastX);
 		if(isDrawing === true){
 			tempctx.beginPath();
+			var xsquare = Math.pow((x-lastX),2);
+			var ysquare = Math.pow((y-lastY),2);
+			var sqrt = Math.sqrt(xsquare + ysquare);
+			var maxofhnit = Math.max(Math.abs(x - lastX), Math.abs(y - lastY));
+			var radius = Math.max(maxofhnit, sqrt);
 
-			tempctx.arc(lastX,lastY,radius,0,2*Math.PI,false);
+
+			console.log(radius);
+			tempctx.clearRect(0,0,canvas.width, canvas.height);
+			tempctx.arc(Math.abs(lastX),Math.abs(lastY),radius,0,Math.PI*2,true);
+			//console.log("X: " + x + " Y : " y);
 			//tempctx.lineWidth = 15;
 			//tempctx.strokeStyle = 'Black';
 			tempctx.stroke();
+			tempctx.closePath();
 		}
 	}
 }
