@@ -3,10 +3,23 @@ $(document).ready(function(){
 
 	$(".btnShape").click(function(e){
 		activeTool = $(this).attr("id");
-		console.log(activeTool);
+		//console.log(activeTool);
 	});
 
-	$("#myCanvas").mousedown(function(e){
+	$(".btnColor").click(function(e){
+		changeColor($(this).attr("id"));
+		console.log($(this).attr("id"));
+	});
+
+	$("#clear").click(function(e){
+		clearimage();
+		});
+
+	$("#undo").click(function(e){
+		undo();
+	});
+
+	$("#imageTemp").mousedown(function(e){
 		var x = e.pageX - this.offsetLeft, y = e.pageY - this.offsetTop;
 		switch (activeTool) {
 			case "pen":
@@ -22,6 +35,7 @@ $(document).ready(function(){
 				Draw.start(x,y);
 				break;
 			case "circle":
+				Draw.circStart();
 				console.log("circle");
 				break;
 			default:
@@ -30,7 +44,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#myCanvas").mousemove(function(e){
+	$("#imageTemp").mousemove(function(e){
 		var x = e.pageX - this.offsetLeft;
 		var y = e.pageY - this.offsetTop;
 		if (activeTool === "pen"){
@@ -42,20 +56,13 @@ $(document).ready(function(){
 		else if (activeTool === "rect"){
 			Draw.rectMove(x,y);
 		}
+		else if (activeTool === "circle"){
+			Draw.circMove(x,y);
+		}
 	});
 
-	$("#myCanvas").mouseup(function(e){
+	$("#imageTemp").mouseup(function(e){
 		Draw.stop();
-/*
-		if (activeTool === "pen"){
-			Draw.stop();
-		}
-		else if (activeTool === "line"){
-			Draw.stop();
-		}
-		else if (activeTool === "rect"){
-			Draw.stop(); 
-		}*/
 		img_update();
 	});
 

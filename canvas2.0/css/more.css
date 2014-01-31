@@ -1,0 +1,15 @@
+#imageTemp {
+	position: relative;
+	bottom: 1px;
+	right:  1050px;
+	
+}
+
+#canvas {
+	position: absolute;
+}
+
+#myCanvas {
+	border: 1px solid #000000;
+
+}
