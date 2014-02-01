@@ -9,9 +9,9 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 context.save();
-	context.fillStyle = '#fff';
-	context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-	context.restore();
+context.fillStyle = '#fff';
+context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+context.restore();
 
 //Create new canvas.
 var container = canvas.parentNode;
@@ -27,31 +27,33 @@ tempctx.fillStyle = '#fff';
 
 
 //Updates the canvas so the newest element appears.
-function img_update(){
+//Clears the temp canvas.
+function imgUpdate(){
 	context.drawImage(temp, 0, 0);
-	tempctx.clearRect(0,0,temp.width,temp.height);
+	tempctx.clearRect(0, 0, temp.width, temp.height);
 }
-//breytir lit
+
 function changeColor(x){
 	Whiteboard.currentColor = x;
 }
-function changeLinewidth(x){
+
+function changeLineWidth(x){
 	tempctx.lineWidth = x;
 }
-//hreinsar myndina
-function clearimage(){
-	context.clearRect(0,0,canvas.width, canvas.height)
+
+function clearImage(){
+	context.clearRect(0, 0, canvas.width, canvas.height)
 	Whiteboard.shapes.length = 0;
 	Whiteboard.shapes = [];
 }
 
-function savecanvas() {
+function saveCanvas() {
 	canvas = document.getElementById("myCanvas");
 	var imgSrc = canvas.toDataURL("image/png");
 	Whiteboard.shapes.push(imgSrc);
-	console.log(Whiteboard.shapes);
+	//console.log(Whiteboard.shapes);
 }
-//gerir galdra.
+
 function undo(){
 	var imgSrc = canvas.toDataURL("image/png");
 	Whiteboard.redoshapes.push(imgSrc);
@@ -85,22 +87,21 @@ function redo(){
 function save(){
 	if (Whiteboard.shapes.length > 0){
 		var imgSrc = canvas.toDataURL("image/png");
-			Whiteboard.saved.push(imgSrc);
-			console.log("lol");
-			console.log(Whiteboard.saved);
+		Whiteboard.saved.push(imgSrc);
+		console.log("lol");
+		console.log(Whiteboard.saved);
 	}
 }
 
 function load(){
-	if (Whiteboard.saved.length > 0)
-	{
-
+	if (Whiteboard.saved.length > 0){
 		var imgL = new Image();
 
 		imgL.onload = function(){
 			var canvasload = document.getElementById("myCanvas").getContext("2d");
 			canvasload.drawImage(imgL, 0, 0);
 		}
+
 		imgL.src = Whiteboard.saved.pop();
 		Whiteboard.saved.length = 0;
 		Whiteboard.saved = [];
@@ -112,7 +113,7 @@ var x, y, w, h, lastX, lastY;
 
 var Draw = {
 	start: function(x,y){
-		savecanvas();
+		saveCanvas();
 		lastX = x, lastY = y;
 		isDrawing = true;
 		tempctx.strokeStyle = Whiteboard.currentColor;
@@ -122,74 +123,48 @@ var Draw = {
 	},
 	penMove: function(x,y){
 		if(isDrawing === true){
-			/*context.beginPath();
-			context.moveTo(lastX,lastY);
-			context.lineTo(x,y);
-			//context.strokeStyle = Whiteboard.currentColor;
-			context.stroke();*/
 			tempctx.beginPath();
-			tempctx.moveTo(lastX,lastY);	
-			tempctx.lineTo(x,y);
+			tempctx.moveTo(lastX, lastY);	
+			tempctx.lineTo(x, y);
 			tempctx.stroke();
 			lastX = x, lastY = y;
 		}
 	},
 	lineMove: function(x,y){
 		if(isDrawing){
-			tempctx.clearRect(0,0,canvas.width,canvas.height);
+			tempctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			tempctx.beginPath();
-				tempctx.moveTo(lastX,lastY);
-				tempctx.lineTo(x,y);
+				tempctx.moveTo(lastX, lastY);
+				tempctx.lineTo(x, y);
 				tempctx.stroke();
 			tempctx.closePath();
 		}
 	},
-	/*lineStop: function(x,y){
-		isDrawing = false;
-		Whiteboard.shapes.push(x,y);
-	},*/
 	rectMove: function(x,y){
 		if(isDrawing === true){
-			tempctx.clearRect(0,0,canvas.width,canvas.height);
+			tempctx.clearRect(0, 0, canvas.width, canvas.height);
 			var w = x - lastX,
 		        h = y - lastY;
 			tempctx.strokeRect(lastX,lastY,w,h);
 		}
 	},
-	/*rectStop: function(x,y){
-		isDrawing = false;
-		console.log("stop");
-	} */
 	circStart: function(x,y){
-		savecanvas();
+		saveCanvas();
 		lastX = x, lastY = y;
 		isDrawing = true;
-		tempctx.strokeStyle = Whiteboard.currentColor
-		/*tempctx.beginPath();
-		tempctx.arc(lastX,lastY,radius,0,2*Math.PI, false);
-		tempctx.fillStyle = "green";
-		tempctx.fill();
-		tempctx.lineWidth = 5;
-		tempctx.strokeStyle = "#003300";		
-		tempctx.stroke();*/
-
 	},
 	circMove: function(x,y){
 		if(isDrawing === true){
 			tempctx.beginPath();
-			var xsquare = Math.pow((x-lastX),2);
-			var ysquare = Math.pow((y-lastY),2);
+			var xsquare = Math.pow((x - lastX), 2);
+			var ysquare = Math.pow((y - lastY), 2);
 			var sqrt = Math.sqrt(xsquare + ysquare);
-			var maxofhnit = Math.max(Math.abs(x - lastX), Math.abs(y - lastY));
-			var radius = Math.max(maxofhnit, sqrt);
+			var maxofcoord = Math.max(Math.abs(x - lastX), Math.abs(y - lastY));
+			var radius = Math.max(maxofcoord, sqrt);
 
-
-			tempctx.clearRect(0,0,canvas.width, canvas.height);
-			tempctx.arc(Math.abs(lastX),Math.abs(lastY),radius,0,Math.PI*2,true);
-			//console.log("X: " + x + " Y : " y);
-			//tempctx.lineWidth = 15;
-			//tempctx.strokeStyle = 'Black';
+			tempctx.clearRect(0, 0, canvas.width, canvas.height);
+			tempctx.arc(Math.abs(lastX),Math.abs(lastY), radius, 0, Math.PI * 2, true);
 			tempctx.stroke();
 			tempctx.closePath();
 		}

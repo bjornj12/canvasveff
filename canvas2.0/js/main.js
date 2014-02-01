@@ -3,17 +3,15 @@ $(document).ready(function(){
 
 	$(".btnShape").click(function(e){
 		activeTool = $(this).attr("id");
-		//console.log(activeTool);
 	});
 
 	$(".btnColor").click(function(e){
 		changeColor($(this).attr("id"));
-		console.log($(this).attr("id"));
 	});
 
 	$("#clear").click(function(e){
-		clearimage();
-		});
+		clearImage();
+	});
 
 	$("#undo").click(function(e){
 		undo();
@@ -33,32 +31,27 @@ $(document).ready(function(){
 
 	var sz = document.forms['pix'].elements['pixels'];
     
-	for (var i=0, len=sz.length; i<len; i++) {
-    sz[i].onclick = function() {
-        changeLinewidth(this.value);
-    };
+	for (var i = 0, len = sz.length; i < len; i++) {
+	    sz[i].onclick = function() {
+	        changeLineWidth(this.value);
+	    };
 	}
-
 
 
 	$("#imageTemp").mousedown(function(e){
 		var x = e.pageX - this.offsetLeft, y = e.pageY - this.offsetTop;
 		switch (activeTool) {
 			case "pen":
-				console.log("pen");
 				Draw.start(x,y);
 				break;
 			case "line":
 				Draw.start(x,y);
-				console.log("line");
 				break;
 			case "rect":
-				console.log("rect");
 				Draw.start(x,y);
 				break;
 			case "circle":
 				Draw.circStart(x,y);
-				console.log("circle");
 				break;
 			default:
 				Draw.start(x,y);
@@ -67,8 +60,7 @@ $(document).ready(function(){
 	});
 
 	$("#imageTemp").mousemove(function(e){
-		var x = e.pageX - this.offsetLeft;
-		var y = e.pageY - this.offsetTop;
+		var x = e.pageX - this.offsetLeft, y = e.pageY - this.offsetTop;
 		if (activeTool === "pen"){
 			Draw.penMove(x,y);
 		}
@@ -85,15 +77,10 @@ $(document).ready(function(){
 
 	$("#imageTemp").mouseup(function(e){
 		Draw.stop();
-		img_update();
+		imgUpdate();
 	});
 
-
-	//Bjössi: verðum aðeins að skoða þetta þegar músin fer útaf canvasnum.
 	$("#myCanvas").mouseout(function(e){
 		Draw.stop();
-		/*if(activeTool === "pen"){
-			Draw.stop();
-		}*/
 	});
 });
