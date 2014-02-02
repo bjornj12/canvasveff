@@ -55,10 +55,9 @@ function saveCanvas() {
 }
 
 function undo(){
-	var imgSrc = canvas.toDataURL("image/png");
-	Whiteboard.redoshapes.push(imgSrc);
-
 	if(Whiteboard.shapes.length > 0){
+		var imgSrc = canvas.toDataURL("image/png");
+	Whiteboard.redoshapes.push(imgSrc);
 		var imgC = new Image();
 
 		imgC.onload = function(){
@@ -86,9 +85,16 @@ function redo(){
 
 function save(){
 	if (Whiteboard.shapes.length > 0){
+		saveCanvas();
 		var imgSrc = canvas.toDataURL("image/png");
-		Whiteboard.saved.push(imgSrc);
-		console.log("lol");
+		
+		Whiteboard.saved.length = 0;
+		Whiteboard.saved = [];
+
+		for (var i = 0; i<Whiteboard.shapes.length; i++)
+			{
+				Whiteboard.saved.push(Whiteboard.shapes[i]);
+			}
 		console.log(Whiteboard.saved);
 	}
 }
@@ -96,13 +102,17 @@ function save(){
 function load(){
 	if (Whiteboard.saved.length > 0){
 		var imgL = new Image();
-
+		Whiteboard.shapes.length = 0;
+		Whiteboard.shapes = [];
+			for (var i = 0; i < Whiteboard.saved.length; i++)
+			{
+					Whiteboard.shapes.push(Whiteboard.saved[i]);
+				}
 		imgL.onload = function(){
 			var canvasload = document.getElementById("myCanvas").getContext("2d");
 			canvasload.drawImage(imgL, 0, 0);
 		}
-
-		imgL.src = Whiteboard.saved.pop();
+		imgL.src = Whiteboard.shapes.pop();
 		Whiteboard.saved.length = 0;
 		Whiteboard.saved = [];
 	}
@@ -110,6 +120,7 @@ function load(){
 
 var isDrawing = false;
 var x, y, w, h, lastX, lastY;
+var iswriting = false;
 
 var Draw = {
 	start: function(x,y){
@@ -149,11 +160,6 @@ var Draw = {
 			tempctx.strokeRect(lastX,lastY,w,h);
 		}
 	},
-	circStart: function(x,y){
-		saveCanvas();
-		lastX = x, lastY = y;
-		isDrawing = true;
-	},
 	circMove: function(x,y){
 		if(isDrawing === true){
 			tempctx.beginPath();
@@ -168,5 +174,9 @@ var Draw = {
 			tempctx.stroke();
 			tempctx.closePath();
 		}
+	},
+
+	text: function(x,y){
+
 	}
 }

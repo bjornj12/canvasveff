@@ -12,8 +12,7 @@
 
 .btn-group{
 	left: 50px;
-	bo ttom: 350px;
-	background-color: orange;
+	bottom: 350px;
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
@@ -29,7 +28,7 @@
 form{
 	left: 520px;
 	bottom: 220px;
-	margin-right: 1700px;
+	margin-right: 1500px;
 	position: relative;
 }
 
