@@ -19,7 +19,28 @@
         <button type="button" id="rect" class="btnShape btn btn-default btn-lg btn-block">Rectangle</button>
         <button type="button" id="circle" class="btnShape btn btn-default btn-lg btn-block">Circle</button>
         <button type="button" id="pen" class="btnShape btn btn-default btn-lg btn-block">Pen</button>
+        <button type="button" id="text" class="btnShape btn btn-default btn-lg btn-block">Text</button>
         </div>
+
+         <select id="Font">
+        <option value="Arial">Arial</option>
+        <option value="Calibri">Calibri</option>
+         <option value="Century">Century</option>
+         <option value="Verdana">Verdana</option>
+         <option value="Impact">Impact</option>
+         <option value="Onyx">Onyx</option>
+         <option value="Algerian">Algerian</option>
+         </select>
+
+        <select id="fontsize">
+        <option value="8pt ">Fontsize 8</option>
+        <option value="10pt ">Fontsize 10</option>
+         <option value="12pt ">Fontsize 12</option>
+         <option value="14pt ">Fontsize 14</option>
+         <option value="18pt ">Fontsize 18</option>
+         <option value="22pt ">Fontsize 22</option>
+         <option value="24pt ">Fontsize 24</option>
+         </select>
 
            <button type="button" id="black" class="color btnColor btn btn-default">Black</button>
            <button type="button" id="red" class="color btnColor btn btn-danger">Red</button> 
@@ -40,21 +61,19 @@
         <input type="radio" name="pixels" value="5">5 pixels<br>
         <input type="radio" name="pixels" value="10">10 pixels<br>
         </form>
+
+        <input type="text" id="textinput">
         
        
-
-
+        
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-        <script src="js/classes.js"></script>
-        <script src="js/Base.js"></script> 
-        <script src="js/main.js"></script>       
-        <!--<script type="text/javascript">
-            $(function(){
-                var $select = $(".1-100");
-                for (i=1;i<=100;i++){
-                    $select.append($('<option></option>').val(i).html(i))
-                }
-            });
-        </script>-->
+       <script src="js/classes.js"></script>
+       <script src="js/Base.js"></script> 
+      <script src="js/main.js"></script>       
+   
+       </script>
+
+
+
     </body>
 </html>

@@ -8,6 +8,7 @@ var Whiteboard = {
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
+
 context.save();
 context.fillStyle = '#fff';
 context.fillRect(0, 0, context.canvas.width, context.canvas.height);
@@ -33,27 +34,31 @@ function imgUpdate(){
 	tempctx.clearRect(0, 0, temp.width, temp.height);
 }
 
+//breytir lit eftir notanda.
 function changeColor(x){
 	Whiteboard.currentColor = x;
 }
 
+//breytir línubreidd.
 function changeLineWidth(x){
 	tempctx.lineWidth = x;
 }
 
+//hreinsar canvasinn.
 function clearImage(){
 	context.clearRect(0, 0, canvas.width, canvas.height)
 	Whiteboard.shapes.length = 0;
 	Whiteboard.shapes = [];
 }
 
+//vistar canvasinn í fylki.
 function saveCanvas() {
 	canvas = document.getElementById("myCanvas");
 	var imgSrc = canvas.toDataURL("image/png");
 	Whiteboard.shapes.push(imgSrc);
-	//console.log(Whiteboard.shapes);
 }
 
+//tekur síðasta sem fór inn á canvas út af canvasnum.
 function undo(){
 	if(Whiteboard.shapes.length > 0){
 		var imgSrc = canvas.toDataURL("image/png");
@@ -64,12 +69,11 @@ function undo(){
 			var canvasbefore = document.getElementById("myCanvas").getContext("2d");
 			canvasbefore.drawImage(imgC, 0, 0);
 		}
-		//Whiteboard.redoshapes.push(Whiteboard.shapes[Whiteboard.shapes.length-1]);
-		console.log(Whiteboard.redoshapes);
 		imgC.src = Whiteboard.shapes.pop();
 	}
 }
 
+//teiknar aftur inn á myndina eftir undo.
 function redo(){
 	if (Whiteboard.redoshapes.length > 0){
 		var imgR = new Image();
@@ -83,6 +87,7 @@ function redo(){
 	}
 }
 
+//fall til að vista mynd sem er á canvas.
 function save(){
 	if (Whiteboard.shapes.length > 0){
 		saveCanvas();
@@ -99,6 +104,7 @@ function save(){
 	}
 }
 
+//fall til að loada vistaðri mynd á canvasinn.
 function load(){
 	if (Whiteboard.saved.length > 0){
 		var imgL = new Image();
@@ -118,10 +124,54 @@ function load(){
 	}
 }
 
+//fall til að koma texta á canvasinn.
+function input(x,y){
+	
+	//cssa textaboxið inn á canvasinn.
+	textinput.style.cssText = "display:inline;"
+	textinput.style.cssText += "position: absolute;"
+	textinput.style.cssText += "top: " + (y+10) + "px;"
+	textinput.style.cssText += "left: " + x + "px;"
+	textinput.style.cssText += "z-index: 99999;"
+	
+	var texti = "";
+
+	//Set textaboxið inn á canvasinn fyrir neðan þar sem notandi vildi skrifa og teikna samstundis það
+	//sem notandi skrifar.
+	textainp = document.getElementById("textinput");
+	$(textainp).keyup(function(){
+    		texti = $(this).val();
+    		var e = document.getElementById("Font");
+			var fontValue = e.options[e.selectedIndex].value;
+
+			var e = document.getElementById("fontsize");
+			var fontSz = e.options[e.selectedIndex].value;
+				tempctx.font = (fontSz + fontValue)
+				tempctx.textBaseline
+				tempctx.clearRect(0, 0, canvas.width, canvas.height);
+				tempctx.fillStyle = Whiteboard.currentColor;
+				tempctx.fillText(texti, x, y+9);	
+    	})
+    	.keyup();
+    	//Þegar ýtt er á enter, þá er vistað textann á canvasinn og textaboxið látið hverfa.
+	$(document).bind('keypress',pressed);
+	function pressed(e)
+	{
+   	 	if(e.keyCode === 13)
+    	{
+    		imgUpdate();
+    		textinput.value = "";
+        	textinput.style.cssText ="display: none;"
+        	imageTemp.style.cssText += "display: inline;"
+    	}
+	}
+
+}
+
 var isDrawing = false;
 var x, y, w, h, lastX, lastY;
-var iswriting = false;
 
+//teiknifallið, fyrir allt nema texta.
 var Draw = {
 	start: function(x,y){
 		saveCanvas();
@@ -174,9 +224,5 @@ var Draw = {
 			tempctx.stroke();
 			tempctx.closePath();
 		}
-	},
-
-	text: function(x,y){
-
 	}
 }
