@@ -126,7 +126,7 @@ function load(){
 
 //fall til að koma texta á canvasinn.
 function input(x,y){
-	
+	saveCanvas();
 	//cssa textaboxið inn á canvasinn.
 	textinput.style.cssText = "display:inline;"
 	textinput.style.cssText += "position: absolute;"
