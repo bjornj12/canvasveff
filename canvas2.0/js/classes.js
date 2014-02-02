@@ -196,9 +196,9 @@ var Draw = {
 			tempctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			tempctx.beginPath();
-				tempctx.moveTo(lastX, lastY);
-				tempctx.lineTo(x, y);
-				tempctx.stroke();
+			tempctx.moveTo(lastX, lastY);
+			tempctx.lineTo(x, y);
+			tempctx.stroke();
 			tempctx.closePath();
 		}
 	},

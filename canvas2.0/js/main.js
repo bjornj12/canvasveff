@@ -3,12 +3,14 @@ $(document).ready(function(){
 
 	$(".btnShape").click(function(e){
 		activeTool = $(this).attr("id");
+		$(".btn-active").removeClass("btn-active");
+		$(this).addClass("btn-active");
 	});
 
 	$(".btnColor").click(function(e){
 		changeColor($(this).attr("id"));
 	});
-
+	
 	$("#clear").click(function(e){
 		clearImage();
 	});
